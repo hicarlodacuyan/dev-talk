@@ -1,34 +1,33 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import { useState, useEffect } from 'react';
+import axios, { AxiosResponse } from 'axios';
 import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0);
+interface Message {
+  message: string;
+}
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  );
+function App() {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    async function getInitialMessage(): Promise<string> {
+      const response: AxiosResponse<Message> = await axios.get(
+        'http://localhost:3001/'
+      );
+      const messageText: string = response.data.message;
+
+      return messageText;
+    }
+
+    async function fetchMessage() {
+      const data = await getInitialMessage();
+      setMessage(data);
+    }
+
+    void fetchMessage();
+  }, []);
+
+  return <div>{message}</div>;
 }
 
 export default App;
