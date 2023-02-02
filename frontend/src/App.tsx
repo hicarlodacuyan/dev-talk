@@ -2,32 +2,43 @@ import { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import './App.css';
 
-interface Message {
-  message: string;
+interface Chat {
+  id: string;
+  user: string;
+  content: string;
+  likes: number;
 }
 
 function App() {
-  const [message, setMessage] = useState('');
+  const [chats, setChats] = useState<Chat[]>([]);
 
   useEffect(() => {
-    async function getInitialMessage(): Promise<string> {
-      const response: AxiosResponse<Message> = await axios.get(
-        'http://localhost:3001/'
+    async function getInitialChats() {
+      const response: AxiosResponse<Chat[]> = await axios.get(
+        'http://localhost:3001/api/chats'
       );
-      const messageText: string = response.data.message;
+      const chats: Chat[] = response.data.map(
+        ({ id, user, content, likes }) => ({
+          id,
+          user,
+          content,
+          likes
+        })
+      );
 
-      return messageText;
+      setChats(chats);
     }
 
-    async function fetchMessage() {
-      const data = await getInitialMessage();
-      setMessage(data);
-    }
-
-    void fetchMessage();
+    void getInitialChats();
   }, []);
 
-  return <div>{message}</div>;
+  return (
+    <ul>
+      {chats.map((chat) => (
+        <li key={chat.id}>{chat.content}</li>
+      ))}
+    </ul>
+  );
 }
 
 export default App;
