@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import config from './utils/config';
+import chatsRouter from './routes/chats';
 
 const app = express();
 const url = config.MONGODB_URI;
@@ -14,6 +15,8 @@ if (url) {
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/chats', chatsRouter);
 
 async function connectToDB(url: string) {
   try {

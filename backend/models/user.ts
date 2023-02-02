@@ -1,16 +1,5 @@
 import mongoose from 'mongoose';
 
-interface UserDocument extends mongoose.Document {
-  username: string;
-  name: string;
-  passwordHash?: string;
-  chats: mongoose.Types.ObjectId[];
-}
-
-interface TransformedUserDocument extends UserDocument {
-  id: string;
-}
-
 const userSchema = new mongoose.Schema({
   username: String,
   name: String,
@@ -24,7 +13,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.set('toJSON', {
-  transform: (_document, returnedObject: TransformedUserDocument) => {
+  transform: (_document, returnedObject) => {
     returnedObject.id = (
       returnedObject._id as mongoose.Types.ObjectId
     ).toString();
@@ -34,6 +23,6 @@ userSchema.set('toJSON', {
   }
 });
 
-const User = mongoose.model<UserDocument>('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 export default User;
