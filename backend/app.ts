@@ -1,7 +1,7 @@
-import config from './utils/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import config from './utils/config';
 
 const app = express();
 const url = config.MONGODB_URI;
