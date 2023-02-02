@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import './App.css';
 
 interface Chat {
   id: string;
@@ -35,7 +34,9 @@ function App() {
   return (
     <ul>
       {chats.map((chat) => (
-        <li key={chat.id}>{chat.content}</li>
+        <li key={chat.id} className="text-3xl font-bold">
+          {chat.content}
+        </li>
       ))}
     </ul>
   );
