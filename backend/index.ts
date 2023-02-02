@@ -1,17 +1,15 @@
-import express from 'express';
-import cors from 'cors';
+import app from './app';
+import http from 'http';
+import config from './utils/config';
 
-const PORT = 3001;
-const app = express();
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-app.use(cors());
-app.use(express.json());
+const server = http.createServer(app);
 
 app.get('/', (_req, res) => {
-  res.send({ message: 'Root route successfully reached without any errors.' });
+  res.send(`
+    <p>Server is running on port ${config.PORT}</p>
+  `);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is now running on port ${PORT}`);
+server.listen(config.PORT, () => {
+  console.log(`Server is now running in port ${config.PORT}`);
 });
