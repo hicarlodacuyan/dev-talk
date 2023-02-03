@@ -23,4 +23,14 @@ chatsRouter.post('/', async (req, res) => {
   }
 });
 
+chatsRouter.delete('/:id', async (req, res) => {
+  try {
+    const id: string = req.params.id;
+    const deletedChat = await chatService.deleteChat(id);
+    res.json(deletedChat);
+  } catch (error) {
+    res.status(400).send({ error });
+  }
+});
+
 export default chatsRouter;

@@ -17,7 +17,14 @@ async function addChat({ content, user, likes }: ChatDocument) {
   return chat;
 }
 
+async function deleteChat(id: string) {
+  const chat = await Chat.findByIdAndRemove(id);
+
+  return chat;
+}
+
 export default {
   getChats,
-  addChat
+  addChat,
+  deleteChat
 };
