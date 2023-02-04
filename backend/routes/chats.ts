@@ -13,6 +13,21 @@ chatsRouter.get('/', async (_req, res) => {
   }
 });
 
+chatsRouter.get('/:id', async (req, res) => {
+  try {
+    const { id }: { id: string } = req.params;
+    const chat = await chatService.getChat(id);
+    
+    if (chat === null) {
+      res.status(404).send({ error: 'Resource not found' });
+    }
+
+    res.json(chat);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
 chatsRouter.post('/', async (req, res) => {
   try {
     const newChatEntry = toNewChatEntry(req.body);
@@ -27,9 +42,14 @@ chatsRouter.delete('/:id', async (req, res) => {
   try {
     const id: string = req.params.id;
     const deletedChat = await chatService.deleteChat(id);
+
+    if (deletedChat === null) {
+      res.status(404).send({ error: 'Resource not found' });
+    }
+
     res.json(deletedChat);
   } catch (error) {
-    res.status(400).send({ error });
+    res.status(500).send({ error });
   }
 });
 

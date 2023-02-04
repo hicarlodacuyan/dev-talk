@@ -7,6 +7,12 @@ async function getChats() {
   return chats;
 }
 
+async function getChat(id: string) {
+  const chat = await Chat.findById(id);
+
+  return chat;
+}
+
 async function addChat({ content, user, likes }: ChatDocument) {
   const chat = await Chat.create({
     content,
@@ -19,12 +25,13 @@ async function addChat({ content, user, likes }: ChatDocument) {
 
 async function deleteChat(id: string) {
   const chat = await Chat.findByIdAndRemove(id);
-
+  
   return chat;
 }
 
 export default {
   getChats,
+  getChat,
   addChat,
   deleteChat
 };
