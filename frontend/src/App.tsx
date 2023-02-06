@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 interface Company {
   id: string;
   user: string;
-  content: string;
+  description: string;
   likes: number;
 }
 
@@ -17,10 +17,10 @@ function App() {
         'http://localhost:3001/api/companies'
       );
       const companies: Company[] = response.data.map(
-        ({ id, user, content, likes }) => ({
+        ({ id, user, description, likes }) => ({
           id,
           user,
-          content,
+          description,
           likes
         })
       );
@@ -33,11 +33,11 @@ function App() {
 
   return (
     <div className="m-4">
-      <h1 className="text-3xl font-bold underline">Companies List</h1>
+      <h1 className="text-3xl font-bold">Companies List</h1>
       <ul>
         {companies.map((company) => (
-          <li key={company.id} className="text-2xl font-bold">
-            • {company.content}
+          <li key={company.id} className="text-2xl font-normal">
+            • {company.description}
           </li>
         ))}
       </ul>
