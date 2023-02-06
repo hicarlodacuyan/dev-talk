@@ -1,13 +1,15 @@
 import mongoose from 'mongoose';
 
-const chatSchema = new mongoose.Schema({
-  content: String,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+const chatSchema = new mongoose.Schema(
+  {
+    content: String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
   },
-  likes: Number
-});
+  { timestamps: true }
+);
 
 chatSchema.set('toJSON', {
   transform: (_document, returnedObject) => {

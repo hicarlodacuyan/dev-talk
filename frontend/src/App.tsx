@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
-interface Chat {
+interface Company {
   id: string;
   user: string;
   content: string;
@@ -9,14 +9,14 @@ interface Chat {
 }
 
 function App() {
-  const [chats, setChats] = useState<Chat[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
 
   useEffect(() => {
-    async function getInitialChats() {
-      const response: AxiosResponse<Chat[]> = await axios.get(
-        'http://localhost:3001/api/chats'
+    async function getInitialCompanies() {
+      const response: AxiosResponse<Company[]> = await axios.get(
+        'http://localhost:3001/api/companies'
       );
-      const chats: Chat[] = response.data.map(
+      const companies: Company[] = response.data.map(
         ({ id, user, content, likes }) => ({
           id,
           user,
@@ -25,20 +25,23 @@ function App() {
         })
       );
 
-      setChats(chats);
+      setCompanies(companies);
     }
 
-    void getInitialChats();
+    void getInitialCompanies();
   }, []);
 
   return (
-    <ul>
-      {chats.map((chat) => (
-        <li key={chat.id} className="text-3xl font-bold">
-          {chat.content}
-        </li>
-      ))}
-    </ul>
+    <div className="m-4">
+      <h1 className="text-3xl font-bold underline">Companies List</h1>
+      <ul>
+        {companies.map((company) => (
+          <li key={company.id} className="text-2xl font-bold">
+            • {company.content}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
