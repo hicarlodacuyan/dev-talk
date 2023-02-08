@@ -14,13 +14,15 @@ async function getCompany(id: string) {
 }
 
 async function addCompany({ description, user, likes }: CompanyDocument) {
-  const company = await Company.create({
+  const company = new Company({
     description,
     user,
     likes
   });
 
-  return company;
+  const savedCompany = await company.save();
+
+  return savedCompany;
 }
 
 async function deleteCompany(id: string) {
