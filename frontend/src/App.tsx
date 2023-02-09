@@ -6,6 +6,7 @@ interface Company {
   user: string;
   description: string;
   likes: number;
+  chats: Array<any>;
 }
 
 function App() {
@@ -21,11 +22,12 @@ function App() {
       'http://localhost:3001/api/companies'
     );
     const companies: Company[] = response.data.map(
-      ({ id, user, description, likes }) => ({
+      ({ id, user, description, likes, chats }) => ({
         id,
         user,
         description,
-        likes
+        likes,
+        chats
       })
     );
 
@@ -57,8 +59,11 @@ function App() {
       </form>
       <ul>
         {companies.map((company) => (
-          <li key={company.id} className="flex items-center gap-2 text-2xl font-normal">
-            • {company.description} <button onClick={() => handleDelete(company.id)} className='bg-red-500 p-1 rounded text-white text-xs'>Delete</button>
+          <li key={company.id} className="flex flex-col gap-2 text-2xl font-normal">
+            <div>• {company.description} 
+              <button onClick={() => handleDelete(company.id)} className='bg-red-500 p-1 rounded text-white text-xs'>Delete</button>
+            </div>
+            {company.chats.map(chat => <p key={chat.id} className="text-xs">{chat.content}</p>)}
           </li>
         ))}
       </ul>

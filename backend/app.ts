@@ -4,6 +4,8 @@ import cors from 'cors';
 import config from './utils/config';
 import logger from './utils/logger';
 import companiesRouter from './routes/companies';
+import chatsRouter from './routes/chats';
+import usersRouter from './routes/users';
 
 const app = express();
 const url = config.MONGODB_URI;
@@ -17,7 +19,9 @@ if (url) {
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/users', usersRouter);
 app.use('/api/companies', companiesRouter);
+app.use('/api/chats', chatsRouter);
 
 async function connectToDB(url: string) {
   try {

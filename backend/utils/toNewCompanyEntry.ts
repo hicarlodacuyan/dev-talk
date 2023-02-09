@@ -4,7 +4,7 @@ import { CompanyDocument } from '../types/company';
 function toNewCompanyEntry(obj: any): CompanyDocument {
   const newCompany: CompanyDocument = {
     description: obj.description as string,
-    user: '63db41b3369d4b132071d2b6',
+    user: obj.user as string,
     likes: obj.likes as number
   };
 

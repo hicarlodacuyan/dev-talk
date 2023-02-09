@@ -2,7 +2,7 @@ import Company from '../models/company';
 import { CompanyDocument } from '../types/company';
 
 async function getCompanies() {
-  const companies = await Company.find({});
+  const companies = await Company.find({}).populate('chats', { content: 1, user: 1 });
 
   return companies;
 }
