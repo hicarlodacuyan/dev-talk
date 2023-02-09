@@ -1,6 +1,7 @@
 import app from './app';
 import http from 'http';
 import config from './utils/config';
+import logger from './utils/logger';
 
 const server = http.createServer(app);
 
@@ -11,5 +12,5 @@ app.get('/', (_req, res) => {
 });
 
 server.listen(config.PORT, () => {
-  console.log(`Server is now running in port ${config.PORT}`);
+  logger.info(`Server is now running in port ${config.PORT}`);
 });
