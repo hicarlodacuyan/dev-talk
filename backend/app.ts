@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import config from './utils/config';
 import logger from './utils/logger';
-import companiesRouter from './routes/companies';
-import chatsRouter from './routes/chats';
-import usersRouter from './routes/users';
+import companiesRouter from './controllers/companies';
+import chatsRouter from './controllers/chats';
+import usersRouter from './controllers/users';
 
 const app = express();
 const url = config.MONGODB_URI;

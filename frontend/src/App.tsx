@@ -63,7 +63,7 @@ function App() {
             <div>• {company.description} 
               <button onClick={() => handleDelete(company.id)} className='bg-red-500 p-1 rounded text-white text-xs'>Delete</button>
             </div>
-            {company.chats.map(chat => <p key={chat.id} className="text-xs">{chat.content}</p>)}
+            {company.chats.map(chat => <p key={chat.id} className="text-sm">{chat.user.username}: {chat.content}</p>)}
           </li>
         ))}
       </ul>

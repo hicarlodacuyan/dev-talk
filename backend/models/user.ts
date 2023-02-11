@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -12,11 +13,15 @@ const userSchema = new mongoose.Schema({
   ]
 });
 
+userSchema.plugin(uniqueValidator);
+
 userSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
-    returnedObject.id = (
-      returnedObject._id as mongoose.Types.ObjectId
-    ).toString();
+    if (returnedObject._id) {
+      returnedObject.id = (
+        returnedObject._id as mongoose.Types.ObjectId
+      ).toString();
+    }
     delete returnedObject._id;
     delete returnedObject.__v;
     delete returnedObject.passwordHash;
