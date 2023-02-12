@@ -35,7 +35,10 @@ function App() {
   }
 
   async function addNewCompany(company: string) {
-    await axios.post('http://localhost:3001/api/companies', { description: company, likes: 0 });
+    const config = {
+      headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhpY2FybG9kYWN1eWFuIiwiaWQiOiI2M2U0OTdkODRkY2NjOTdhZGUwMWJiMzUiLCJpYXQiOjE2NzYxNjUyNjR9.c4Ugp3BSzESZfL4kSUrn7gDuq2Z2uBASVJqbO4C4LJM` }
+    };
+    await axios.post('http://localhost:3001/api/companies', { description: company }, config);
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {

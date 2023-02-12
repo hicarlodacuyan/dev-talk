@@ -1,13 +1,8 @@
 import express from "express";
-import jwt from "jsonwebtoken";
 import Company from "../models/company";
-import User from "../models/user";
 import getTokenFrom from "../utils/getTokenFrom";
-import config from "../utils/config";
-
-interface JwtPayload {
-  id: string;
-}
+import getUserByToken from "../utils/getUserByToken";
+import toNewCompanyEntry from "../utils/toNewCompanyEntry";
 
 const companiesRouter = express.Router();
 
@@ -31,29 +26,13 @@ companiesRouter.get("/:id", async (req, res) => {
 });
 
 companiesRouter.post("/", async (req, res) => {
-  const body = req.body;
+  const newCompanyEntry = toNewCompanyEntry(req.body);
   const token = getTokenFrom(req);
-
-  if (!token) {
-    return res.status(401).json({ error: "token missing" });
-  }
-
-  if (!config.SECRET) {
-    return res.status(500).json({ error: "secret missing" });
-  }
-
-  const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload;
-
-  if (!decodedToken.id) {
-    return res.status(401).json({ error: "token invalid" });
-  }
-
-  const user: any = await User.findById(decodedToken.id);
-
+  const user = await getUserByToken(token);
   const company = new Company({
-    description: body.description,
     user: user._id,
-    likes: body.likes,
+    description: newCompanyEntry.description,
+    likes: newCompanyEntry.likes,
   });
   const savedCompany = await company.save();
 

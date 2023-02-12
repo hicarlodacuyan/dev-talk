@@ -1,11 +1,17 @@
-const getTokenFrom = (req: any) => {
-  const authorization = req.get("authorization");
+import { Request } from "express";
 
-  if (authorization && authorization.startsWith("Bearer ")) {
-    return authorization.replace("Bearer ", "");
+const getTokenFrom = (req: Request): string => {
+  const tokenWithBearer = req.get("authorization");
+
+  if (tokenWithBearer !== undefined) {
+    if (tokenWithBearer.startsWith("Bearer ")) {
+      return tokenWithBearer.replace("Bearer ", "");
+    }
+
+    return tokenWithBearer;
   }
 
-  return null;
+  throw new Error("Incorrect data: authorization token is missing");
 };
 
 export default getTokenFrom;

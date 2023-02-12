@@ -1,7 +1,9 @@
+import { Chat } from "./chat";
+
 export interface CompanyDocument {
   description: string;
-  user: string;
-  likes: number;
+  likes?: number;
+  chats?: Array<Chat>;
 }
 
 export interface TransformedCompanyDocument extends CompanyDocument {
