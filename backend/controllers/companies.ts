@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import Company from "../models/company";
 import User from "../models/user";
 import getTokenFrom from "../utils/getTokenFrom";
+import config from "../utils/config";
 
 interface JwtPayload {
   id: string;
@@ -37,11 +38,11 @@ companiesRouter.post("/", async (req, res) => {
     return res.status(401).json({ error: "token missing" });
   }
 
-  if (!process.env.SECRET) {
+  if (!config.SECRET) {
     return res.status(500).json({ error: "secret missing" });
   }
 
-  const decodedToken = jwt.verify(token, process.env.SECRET) as JwtPayload;
+  const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload;
 
   if (!decodedToken.id) {
     return res.status(401).json({ error: "token invalid" });
