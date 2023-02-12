@@ -1,7 +1,13 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import Chat from '../models/chat';
 import User from '../models/user';
 import Company from '../models/company';
+import getTokenFrom from '../utils/getTokenFrom';
+
+interface JwtPayload {
+  id: string
+}
 
 const chatsRouter = express.Router();
 
@@ -13,7 +19,24 @@ chatsRouter.get('/', async (_req, res) => {
 
 chatsRouter.post('/', async (req, res) => {
   const body = req.body;
-  const user: any = await User.findById(body.userId);
+  const token = getTokenFrom(req);
+
+  if (!token) {
+    return res.status(401).json({ error: 'token missing' });
+  }
+
+  if (!process.env.SECRET) {
+    return res.status(500).json({ error: 'secret missing' });
+  }
+
+  const decodedToken = jwt.verify(token, process.env.SECRET) as JwtPayload;
+
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token invalid' });
+  }
+
+  const user: any = await User.findById(decodedToken.id);
+
   const company: any = await Company.findById(body.companyId);
 
   const chat = new Chat({
@@ -30,7 +53,7 @@ chatsRouter.post('/', async (req, res) => {
   company.chats = [...company.chats].concat(savedChat._id);
   await company.save()
   
-  res.json(savedChat);
+  return res.json(savedChat);
 });
 
 export default chatsRouter;

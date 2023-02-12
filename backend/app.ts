@@ -6,6 +6,7 @@ import logger from './utils/logger';
 import companiesRouter from './controllers/companies';
 import chatsRouter from './controllers/chats';
 import usersRouter from './controllers/users';
+import loginRouter from './controllers/login';
 
 const app = express();
 const url = config.MONGODB_URI;
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/users', usersRouter);
 app.use('/api/companies', companiesRouter);
 app.use('/api/chats', chatsRouter);
+app.use('/api/login', loginRouter);
 
 async function connectToDB(url: string) {
   try {

@@ -1,5 +1,12 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import Company from '../models/company';
+import User from '../models/user';
+import getTokenFrom from '../utils/getTokenFrom';
+
+interface JwtPayload {
+  id: string
+}
 
 const companiesRouter = express.Router();
 
@@ -24,14 +31,32 @@ companiesRouter.get('/:id', async (req, res) => {
 
 companiesRouter.post('/', async (req, res) => {
   const body = req.body;
+  const token = getTokenFrom(req);
+
+  if (!token) {
+    return res.status(401).json({ error: 'token missing' });
+  }
+
+  if (!process.env.SECRET) {
+    return res.status(500).json({ error: 'secret missing' });
+  }
+
+  const decodedToken = jwt.verify(token, process.env.SECRET) as JwtPayload;
+  
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token invalid' });
+  }
+
+  const user: any = await User.findById(decodedToken.id);
+
   const company = new Company({
     description: body.description,
-    user: body.user,
+    user: user._id,
     likes: body.likes
   });
   const savedCompany = await company.save();
   
-  res.status(201).json(savedCompany);
+  return res.status(201).json(savedCompany);
 });
 
 companiesRouter.put('/:id', async (req, res) => {

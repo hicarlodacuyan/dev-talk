@@ -53,7 +53,7 @@ function App() {
   return (
     <div className="flex flex-col gap-4 m-4">
       <h1 className="text-3xl font-bold">Companies List</h1>
-      <form onSubmit={handleSubmit} className="flex gap-2" >
+      <form onSubmit={handleSubmit} className="flex gap-2">
         <input value={newCompany} onChange={(e) => setNewCompany(e.target.value)} type='text' className='border-solid border-2 border-slate-500 rounded' />
         <input type='submit' className='bg-green-500 p-1 rounded text-white text-xs hover:cursor-pointer' />
       </form>
