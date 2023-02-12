@@ -8,5 +8,5 @@ function error(...params: any) {
 
 export default {
   info,
-  error
-}
+  error,
+};

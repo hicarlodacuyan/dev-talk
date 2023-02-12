@@ -1,8 +1,8 @@
 const getTokenFrom = (req: any) => {
-  const authorization = req.get('authorization');
+  const authorization = req.get("authorization");
 
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '');
+  if (authorization && authorization.startsWith("Bearer ")) {
+    return authorization.replace("Bearer ", "");
   }
 
   return null;

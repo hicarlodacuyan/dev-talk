@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import uniqueValidator from 'mongoose-unique-validator';
+import mongoose from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -8,14 +8,14 @@ const userSchema = new mongoose.Schema({
   chats: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Chat'
-    }
-  ]
+      ref: "Chat",
+    },
+  ],
 });
 
 userSchema.plugin(uniqueValidator);
 
-userSchema.set('toJSON', {
+userSchema.set("toJSON", {
   transform: (_document, returnedObject) => {
     if (returnedObject._id) {
       returnedObject.id = (
@@ -25,9 +25,9 @@ userSchema.set('toJSON', {
     delete returnedObject._id;
     delete returnedObject.__v;
     delete returnedObject.passwordHash;
-  }
+  },
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

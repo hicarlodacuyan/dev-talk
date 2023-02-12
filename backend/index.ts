@@ -1,11 +1,11 @@
-import app from './app';
-import http from 'http';
-import config from './utils/config';
-import logger from './utils/logger';
+import app from "./app";
+import http from "http";
+import config from "./utils/config";
+import logger from "./utils/logger";
 
 const server = http.createServer(app);
 
-app.get('/', (_req, res) => {
+app.get("/", (_req, res) => {
   res.send(`
     <p>Server is running on port ${config.PORT}</p>
   `);
