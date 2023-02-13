@@ -1,4 +1,5 @@
 import express from "express";
+import "express-async-errors";
 import mongoose from "mongoose";
 import cors from "cors";
 import config from "./utils/config";
@@ -7,6 +8,7 @@ import loginRouter from "./controllers/login";
 import chatsRouter from "./controllers/chats";
 import usersRouter from "./controllers/users";
 import companiesRouter from "./controllers/companies";
+import errorHandler from "./middlewares/errorHandler";
 
 const app = express();
 const url = config.MONGODB_URI;
@@ -24,5 +26,6 @@ app.use("/api/login", loginRouter);
 app.use("/api/chats", chatsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/companies", companiesRouter);
+app.use(errorHandler);
 
 export default app;

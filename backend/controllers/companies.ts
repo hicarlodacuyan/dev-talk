@@ -1,5 +1,6 @@
 import express from "express";
 import Company from "../models/company";
+import { CompanyDocument } from "../types/company";
 import getTokenFrom from "../utils/getTokenFrom";
 import getUserByToken from "../utils/getUserByToken";
 import toNewCompanyEntry from "../utils/toNewCompanyEntry";
@@ -26,8 +27,8 @@ companiesRouter.get("/:id", async (req, res) => {
 });
 
 companiesRouter.post("/", async (req, res) => {
-  const newCompanyEntry = toNewCompanyEntry(req.body);
-  const token = getTokenFrom(req);
+  const newCompanyEntry: CompanyDocument = toNewCompanyEntry(req.body);
+  const token: string = getTokenFrom(req);
   const user = await getUserByToken(token);
   const company = new Company({
     user: user._id,
