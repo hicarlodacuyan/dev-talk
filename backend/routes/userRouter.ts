@@ -1,16 +1,16 @@
-import bcrypt from 'bcryptjs';
-import express from 'express';
-import User from '../models/user';
+import bcrypt from "bcryptjs";
+import express from "express";
+import User from "../models/user";
 
 const usersRouter = express.Router();
 
-usersRouter.get('/', async (_req, res) => {
-  const users = await User.find({}).populate('chats');
+usersRouter.get("/", async (_req, res) => {
+  const users = await User.find({}).populate("chats");
 
   res.json(users);
 });
 
-usersRouter.post('/', async (req, res) => {
+usersRouter.post("/", async (req, res) => {
   const { username, name, password } = req.body;
 
   const saltRounds = 10;
@@ -19,7 +19,7 @@ usersRouter.post('/', async (req, res) => {
   const user = new User({
     username,
     name,
-    passwordHash
+    passwordHash,
   });
 
   const savedUser = await user.save();
