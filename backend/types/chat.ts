@@ -1,4 +1,4 @@
-export interface Chat {
+export interface ChatDocument {
   content: string;
   companyId: string;
 }
