@@ -18,13 +18,9 @@ const getChats = async (_req: Request, res: Response): Promise<void> => {
   res.json(chats);
 };
 
-const createChat = async (req: Request, res: Response) => {
+const createChat = async (req: Request, res: Response): Promise<Response> => {
   const newChatEntry: ChatDocument = toNewChatEntry(req.body);
   const token = getTokenFrom(req);
-
-  if (!token) {
-    return res.status(401).json({ error: "token missing" });
-  }
 
   if (!config.SECRET) {
     return res.status(500).json({ error: "secret missing" });
@@ -32,14 +28,12 @@ const createChat = async (req: Request, res: Response) => {
 
   const decodedToken = jwt.verify(token, config.SECRET) as JwtPayload;
 
-  if (!decodedToken.id) {
-    return res.status(401).json({ error: "token invalid" });
-  }
+  const [user, company] = await Promise.all([
+    User.findById(decodedToken.id),
+    Company.findById(newChatEntry.companyId),
+  ]);
 
-  const user = await User.findById(decodedToken.id);
-  const company = await Company.findById(newChatEntry.companyId);
-
-  if (!(user && company)) {
+  if (!user || !company) {
     return res.status(401).json({ error: "Incorrect data" });
   }
 
