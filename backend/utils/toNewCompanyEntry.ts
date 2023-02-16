@@ -1,8 +1,5 @@
 import { CompanyDocument } from "../types/company";
-
-const isString = (text: unknown): text is string => {
-  return typeof text === "string" || text instanceof String;
-};
+import isString from "./isString";
 
 const parseDescription = (description: unknown): string => {
   if (!description || !isString(description)) {
