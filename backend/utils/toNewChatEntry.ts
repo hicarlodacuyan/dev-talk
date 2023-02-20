@@ -1,13 +1,5 @@
 import { ChatDocument } from "../types/chat";
-import isString from "./isString";
-
-const parseContent = (content: unknown): string => {
-  if (!content || !isString(content)) {
-    throw new Error("Incorrect or missing chat message");
-  }
-
-  return content;
-};
+import parseString from "./parseString";
 
 const toNewChatEntry = (obj: unknown): ChatDocument => {
   if (!obj || typeof obj !== "object") {
@@ -16,8 +8,8 @@ const toNewChatEntry = (obj: unknown): ChatDocument => {
 
   if ("content" in obj && "companyId" in obj) {
     const newChat: ChatDocument = {
-      content: parseContent(obj.content),
-      companyId: obj.companyId as string,
+      content: parseString(obj.content),
+      companyId: parseString(obj.companyId),
     };
 
     return newChat;

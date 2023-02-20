@@ -1,13 +1,5 @@
 import { CompanyDocument } from "../types/company";
-import isString from "./isString";
-
-const parseDescription = (description: unknown): string => {
-  if (!description || !isString(description)) {
-    throw new Error("Incorrect or missing comment");
-  }
-
-  return description;
-};
+import parseString from "./parseString";
 
 const toNewCompanyEntry = (obj: unknown): CompanyDocument => {
   if (!obj || typeof obj !== "object") {
@@ -16,7 +8,7 @@ const toNewCompanyEntry = (obj: unknown): CompanyDocument => {
 
   if ("description" in obj) {
     const newCompany: CompanyDocument = {
-      description: parseDescription(obj.description),
+      description: parseString(obj.description),
       likes: 0,
     };
 

@@ -5,9 +5,10 @@ const userCredentials = (obj: unknown) => {
     throw new Error("Incorrect or missing data");
   }
 
-  if ("username" in obj && "password" in obj) {
+  if ("username" in obj && "name" in obj && "password" in obj) {
     const user = {
       username: parseString(obj.username),
+      name: parseString(obj.name),
       password: parseString(obj.password),
     };
 
