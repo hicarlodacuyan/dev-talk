@@ -20,7 +20,7 @@ const getChats = async (_req: Request, res: Response): Promise<void> => {
 
 const createChat = async (req: Request, res: Response): Promise<Response> => {
   const newChatEntry: ChatDocument = toNewChatEntry(req.body);
-  const token = getTokenFrom(req);
+  const token: string = getTokenFrom(req);
 
   if (!config.SECRET) {
     return res.status(500).json({ error: "secret missing" });
