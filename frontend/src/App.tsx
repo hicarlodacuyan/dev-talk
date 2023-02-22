@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import loginService from "./services/login";
+import LoginForm from "./components/LoginForm";
+import Logout from "./components/Logout";
 import { UserCredentials } from "./types/user";
 
 const App = () => {
@@ -17,54 +18,26 @@ const App = () => {
     }
   }, []);
 
-  const handleLogin = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    try {
-      const user: UserCredentials = await loginService.login({
-        username,
-        password,
-      });
-
-      window.localStorage.setItem("loggedInUserToken", JSON.stringify(user));
-
-      setUser(user);
-      setUsername("");
-      setPassword("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   if (!user) {
     return (
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
-        </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
+      <div className="flex justify-center flex-col h-screen gap-4">
+        <h1 className="text-center text-4xl md:text-6xl font-bold text-slate-300">
+          <span className="text-slate-500 font-extrabold">Dev</span>Talk
+        </h1>
+        <LoginForm
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          setUser={setUser}
+        />
+      </div>
     );
   }
 
   return (
     <div>
-      <h1>DevTalk</h1>
+      <Logout setUser={setUser} />
     </div>
   );
 };
