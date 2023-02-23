@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import type { AppDispatch, RootState } from "../app/store";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NewUserCredentials } from "../types/user";
 import { register, reset } from "../features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 const Register = () => {
   const [formData, setFormData] = useState<NewUserCredentials>({
@@ -15,10 +14,10 @@ const Register = () => {
   const { name, username, password } = formData;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state: RootState) => state.auth
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state) => state.auth
   );
 
   useEffect(() => {

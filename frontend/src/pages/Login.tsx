@@ -1,18 +1,7 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login, reset } from "../features/auth/authSlice";
-import { UserCredentials } from "../types/user";
-
-interface RootState {
-  auth: {
-    user: UserCredentials | undefined;
-    isError: boolean;
-    isSuccess: boolean;
-    isLoading: boolean;
-    message: string;
-  };
-}
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,10 +12,10 @@ const Login = () => {
   const { username, password } = formData;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state: RootState) => state.auth
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state) => state.auth
   );
 
   useEffect(() => {
@@ -48,15 +37,14 @@ const Login = () => {
     }));
   };
 
-  const handleLogin = (event: React.SyntheticEvent) => {
+  const handleLogin = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     const userCrentials = {
       username,
       password,
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dispatch(login(userCrentials) as any);
+    await dispatch(login(userCrentials));
   };
 
   if (isLoading) {
