@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { NewUserCredentials, UserCredentials } from "../../types/user";
+import {
+  AuthState,
+  NewUserCredentials,
+  UserCredentials,
+} from "../../types/user";
 import authService from "../../services/auth";
 
 const loggedInUserTokenJSON = window.localStorage.getItem("loggedInUserToken");
@@ -10,7 +14,7 @@ if (loggedInUserTokenJSON) {
   user = JSON.parse(loggedInUserTokenJSON) as UserCredentials;
 }
 
-const initialState = {
+const initialState: AuthState = {
   user: user ? user : undefined,
   isError: false,
   isSuccess: false,
