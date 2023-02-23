@@ -1,19 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState, useEffect } from "react";
+import type { AppDispatch, RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { NewUserCredentials, UserCredentials } from "../types/user";
+import { NewUserCredentials } from "../types/user";
 import { register, reset } from "../features/auth/authSlice";
-
-interface RootState {
-  auth: {
-    user: UserCredentials | undefined;
-    isError: boolean;
-    isSuccess: boolean;
-    isLoading: boolean;
-    message: string;
-  };
-}
 
 const Register = () => {
   const [formData, setFormData] = useState<NewUserCredentials>({
@@ -25,7 +15,7 @@ const Register = () => {
   const { name, username, password } = formData;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state: RootState) => state.auth
@@ -50,16 +40,15 @@ const Register = () => {
     }));
   };
 
-  const handleRegistration = (event: React.SyntheticEvent) => {
+  const handleRegistration = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const userCrentials = {
+    const userCrentials: NewUserCredentials = {
       name,
       username,
       password,
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dispatch(register(userCrentials) as any);
+    await dispatch(register(userCrentials));
   };
 
   if (isLoading) {
@@ -104,7 +93,7 @@ const Register = () => {
         type="submit"
         className="font-bold text-white bg-slate-500 rounded-sm p-2"
       >
-        Login
+        Register
       </button>
     </form>
   );
