@@ -15,7 +15,9 @@ const login = async ({
       password,
     }
   );
+
   localStorage.setItem("loggedInUserToken", JSON.stringify(response.data));
+
   return response.data;
 };
 

@@ -7,3 +7,11 @@ export interface UserCredentials {
 export interface NewUserCredentials extends UserCredentials {
   password: string;
 }
+
+export interface AuthState {
+  user: UserCredentials | undefined;
+  isError: boolean;
+  isSuccess: boolean;
+  isLoading: boolean;
+  message: string;
+}
