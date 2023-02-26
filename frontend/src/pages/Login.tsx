@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login, reset } from "../features/auth/authSlice";
+import Register from "./Register";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -52,37 +53,42 @@ const Login = () => {
   }
 
   return (
-    <form
-      onSubmit={handleLogin}
-      className="flex flex-col container max-w-md mx-auto gap-2"
-    >
-      <div className="flex flex-col text-sm gap-2">
-        <input
-          type="text"
-          value={username}
-          name="username"
-          onChange={onChange}
-          placeholder="Username"
-          required
-          className="p-2 rounded-sm border-solid border-2 border-slate-500"
-        />
-        <input
-          type="password"
-          value={password}
-          name="password"
-          onChange={onChange}
-          placeholder="Password"
-          required
-          className="p-2 rounded-sm border-solid border-2 border-slate-500"
-        />
-      </div>
-      <button
-        type="submit"
-        className="font-bold text-white bg-slate-500 rounded-sm p-2"
-      >
-        Login
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleLogin} className="flex flex-col max-w-md gap-2">
+        <div className="flex flex-col text-sm gap-2">
+          <input
+            type="text"
+            value={username}
+            name="username"
+            onChange={onChange}
+            placeholder="Username"
+            required
+            className="p-2 rounded-sm border-solid border-2 border-slate-500"
+          />
+          <input
+            type="password"
+            value={password}
+            name="password"
+            onChange={onChange}
+            placeholder="Password"
+            required
+            className="p-2 rounded-sm border-solid border-2 border-slate-500"
+          />
+        </div>
+        <button
+          type="submit"
+          className="font-bold text-white bg-slate-500 rounded-sm p-2"
+        >
+          Login
+        </button>
+      </form>
+      <p>
+        Need an account?{" "}
+        <Link to="/register" className="text-blue-500">
+          Sign Up
+        </Link>
+      </p>
+    </div>
   );
 };
 
