@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NewUserCredentials } from "../types/user";
 import { register, reset } from "../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -55,46 +55,54 @@ const Register = () => {
   }
 
   return (
-    <form
-      onSubmit={handleRegistration}
-      className="flex flex-col container max-w-md mx-auto gap-2"
-    >
-      <div className="flex flex-col text-sm gap-2">
-        <input
-          type="text"
-          value={name}
-          name="name"
-          onChange={onChange}
-          placeholder="Name"
-          required
-          className="p-2 rounded-sm border-solid border-2 border-slate-500"
-        />
-        <input
-          type="text"
-          value={username}
-          name="username"
-          onChange={onChange}
-          placeholder="Username"
-          required
-          className="p-2 rounded-sm border-solid border-2 border-slate-500"
-        />
-        <input
-          type="password"
-          value={password}
-          name="password"
-          onChange={onChange}
-          placeholder="Password"
-          required
-          className="p-2 rounded-sm border-solid border-2 border-slate-500"
-        />
-      </div>
-      <button
-        type="submit"
-        className="font-bold text-white bg-slate-500 rounded-sm p-2"
+    <div>
+      <form
+        onSubmit={handleRegistration}
+        className="flex flex-col max-w-md gap-2"
       >
-        Register
-      </button>
-    </form>
+        <div className="flex flex-col text-sm gap-2">
+          <input
+            type="text"
+            value={name}
+            name="name"
+            onChange={onChange}
+            placeholder="Name"
+            required
+            className="p-2 rounded-sm border-solid border-2 border-slate-500"
+          />
+          <input
+            type="text"
+            value={username}
+            name="username"
+            onChange={onChange}
+            placeholder="Username"
+            required
+            className="p-2 rounded-sm border-solid border-2 border-slate-500"
+          />
+          <input
+            type="password"
+            value={password}
+            name="password"
+            onChange={onChange}
+            placeholder="Password"
+            required
+            className="p-2 rounded-sm border-solid border-2 border-slate-500"
+          />
+        </div>
+        <button
+          type="submit"
+          className="font-bold text-white bg-slate-500 rounded-sm p-2"
+        >
+          Register
+        </button>
+      </form>
+      <p>
+        Already have an account?{" "}
+        <Link to="/login" className="text-blue-500">
+          Login
+        </Link>
+      </p>
+    </div>
   );
 };
 
