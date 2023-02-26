@@ -1,19 +1,16 @@
-import { Dispatch } from "react";
-import { UserCredentials } from "../types/user";
+import { logout } from "../features/auth/authSlice";
+import { useAppDispatch } from "../app/hooks";
 
-const Logout = ({
-  setUser,
-}: {
-  setUser: Dispatch<React.SetStateAction<UserCredentials | null>>;
-}) => {
-  const logout = () => {
-    window.localStorage.clear();
-    setUser(null);
+const Logout = () => {
+  const dispatch = useAppDispatch();
+
+  const onLogout = async () => {
+    await dispatch(logout());
   };
 
   return (
     <button
-      onClick={logout}
+      onClick={onLogout}
       className="font-bold text-white bg-red-500 rounded-sm p-2"
     >
       Logout
