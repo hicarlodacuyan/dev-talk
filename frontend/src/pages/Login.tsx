@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login, reset } from "../features/auth/authSlice";
-import Register from "./Register";
 
 const Login = () => {
   const [formData, setFormData] = useState({
