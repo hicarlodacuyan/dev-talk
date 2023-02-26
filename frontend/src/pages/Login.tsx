@@ -23,7 +23,7 @@ const Login = () => {
       console.log(message);
     }
 
-    if (isSuccess || user) {
+    if (isSuccess || user?.token) {
       navigate("/");
     }
 
