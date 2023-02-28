@@ -3,6 +3,7 @@
 Join communities of programmers and start discussions about companies. Search or start new company conversations with a discord-like interface. Built with **React**, **Redux**, **MongoDB**, **Express**, **NodeJS** and **TypeScript**.
 
 - :white_check_mark: A user can login or register for a new account
+- :black_square_button: A user can received an error in the login page if username/password is invalid
 - :white_check_mark: If a user is not logged in, he/she can not view the chat room
 - :black_square_button: By default, a user is going to be redirected to Welcome channel
 - :black_square_button: A user can create a new company channel with a name and a description
