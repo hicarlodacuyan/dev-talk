@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { login, reset } from "../features/auth/authSlice";
 
@@ -20,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      toast(message);
     }
 
     if (isSuccess || user?.token) {
