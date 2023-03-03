@@ -53,41 +53,59 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleLogin} className="flex flex-col max-w-md gap-2">
-        <div className="flex flex-col text-sm gap-2">
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={onChange}
-            placeholder="Username"
-            required
-            className="p-2 rounded-sm border-solid border-2 border-slate-500"
-          />
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={onChange}
-            placeholder="Password"
-            required
-            className="p-2 rounded-sm border-solid border-2 border-slate-500"
-          />
-        </div>
-        <button
-          type="submit"
-          className="font-bold text-white bg-slate-500 rounded-sm p-2"
+    <div className="flex flex-col justify-center gap-8 lg:flex-row bg-gray-100 p-4 lg:p-32 h-screen gap">
+      <section className="lg:flex-1 flex flex-col justify-center lg:gap-10">
+        <h1 className="text-gray-700 font-extrabold text-2xl lg:text-4xl">
+          Join communities of programmers and start discussions about companies
+        </h1>
+        <p className="text-gray-500 text-base">
+          Search or start new company conversations with a discord-like
+          interface. Built with React, Redux, MongoDB, Express, NodeJS and
+          TypeScript.
+        </p>
+      </section>
+      <section className="lg:flex-1 flex flex-col justify-center lg:items-center gap-4">
+        <form
+          onSubmit={handleLogin}
+          className="bg-white p-8 rounded-md drop-shadow-md flex flex-col gap-2 lg:w-3/5"
         >
-          Login
-        </button>
-      </form>
-      <p>
-        Need an account?{" "}
-        <Link to="/register" className="text-blue-500">
-          Sign Up
-        </Link>
-      </p>
+          <div className="flex flex-col text-sm gap-4">
+            <h1 className="text-gray-700 text-center font-semibold text-2xl">
+              Login your account
+            </h1>
+            <input
+              type="text"
+              value={username}
+              name="username"
+              onChange={onChange}
+              placeholder="Username"
+              required
+              className="p-2 rounded-sm border-solid border-2 border-slate-300"
+            />
+            <input
+              type="password"
+              value={password}
+              name="password"
+              onChange={onChange}
+              placeholder="Password"
+              required
+              className="p-2 rounded-sm border-solid border-2 border-slate-300"
+            />
+            <button
+              type="submit"
+              className="font-bold text-white bg-slate-500 rounded-sm p-2"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <p className="text-gray-500 text-center">
+          Need an account?{" "}
+          <Link to="/register" className="text-blue-500">
+            Sign Up
+          </Link>
+        </p>
+      </section>
     </div>
   );
 };

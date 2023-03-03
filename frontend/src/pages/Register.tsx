@@ -56,53 +56,68 @@ const Register = () => {
   }
 
   return (
-    <div>
-      <form
-        onSubmit={handleRegistration}
-        className="flex flex-col max-w-md gap-2"
-      >
-        <div className="flex flex-col text-sm gap-2">
-          <input
-            type="text"
-            value={name}
-            name="name"
-            onChange={onChange}
-            placeholder="Name"
-            required
-            className="p-2 rounded-sm border-solid border-2 border-slate-500"
-          />
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={onChange}
-            placeholder="Username"
-            required
-            className="p-2 rounded-sm border-solid border-2 border-slate-500"
-          />
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={onChange}
-            placeholder="Password"
-            required
-            className="p-2 rounded-sm border-solid border-2 border-slate-500"
-          />
-        </div>
-        <button
-          type="submit"
-          className="font-bold text-white bg-slate-500 rounded-sm p-2"
+    <div className="flex flex-row h-screen bg-gray-100 p-32">
+      <section className="flex-1 flex flex-col justify-center gap-10">
+        <h1 className="text-gray-700 font-extrabold text-2xl md:text-4xl">
+          Join communities of programmers and start discussions about companies
+        </h1>
+        <p className="text-gray-500 text-base">
+          Search or start new company conversations with a discord-like
+          interface. Built with React, Redux, MongoDB, Express, NodeJS and
+          TypeScript.
+        </p>
+      </section>
+      <section className="flex-1 flex flex-col justify-center items-center gap-4">
+        <form
+          onSubmit={handleRegistration}
+          className="bg-white p-8 rounded-md drop-shadow-md flex flex-col gap-2 w-3/5"
         >
-          Register
-        </button>
-      </form>
-      <p>
-        Already have an account?{" "}
-        <Link to="/login" className="text-blue-500">
-          Login
-        </Link>
-      </p>
+          <div className="flex flex-col text-sm gap-4">
+            <h1 className="text-gray-700 text-center font-semibold text-2xl">
+              Register an account
+            </h1>
+            <input
+              type="text"
+              value={name}
+              name="name"
+              onChange={onChange}
+              placeholder="Name"
+              required
+              className="p-2 rounded-sm border-solid border-2 border-slate-300"
+            />
+            <input
+              type="text"
+              value={username}
+              name="username"
+              onChange={onChange}
+              placeholder="Username"
+              required
+              className="p-2 rounded-sm border-solid border-2 border-slate-300"
+            />
+            <input
+              type="password"
+              value={password}
+              name="password"
+              onChange={onChange}
+              placeholder="Password"
+              required
+              className="p-2 rounded-sm border-solid border-2 border-slate-300"
+            />
+            <button
+              type="submit"
+              className="font-bold text-white bg-slate-500 rounded-sm p-2"
+            >
+              Register
+            </button>
+          </div>
+        </form>
+        <p>
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500">
+            Login
+          </Link>
+        </p>
+      </section>
     </div>
   );
 };
