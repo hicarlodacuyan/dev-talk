@@ -12,6 +12,11 @@ const getUsers = async (_req: Request, res: Response) => {
 const createUser = async (req: Request, res: Response) => {
   const { username, name, password } = toNewUserEntry(req.body);
 
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.status(400).send("Username is already registered.");
+  }
+
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
@@ -23,7 +28,7 @@ const createUser = async (req: Request, res: Response) => {
 
   const savedUser = await user.save();
 
-  res.status(201).json(savedUser);
+  return res.status(201).json(savedUser);
 };
 
 export default {
