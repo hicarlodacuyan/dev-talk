@@ -21,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast(message);
+      toast.error(message);
     }
 
     if (isSuccess || user?.token) {
