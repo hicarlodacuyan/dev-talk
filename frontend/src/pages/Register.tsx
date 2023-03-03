@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { NewUserCredentials } from "../types/user";
 import { register, reset } from "../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [formData, setFormData] = useState<NewUserCredentials>({
@@ -22,7 +23,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      toast.error(message);
     }
 
     if (isSuccess || user) {
