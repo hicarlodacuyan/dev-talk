@@ -93,7 +93,7 @@ const Login = () => {
             />
             <button
               type="submit"
-              className="font-bold text-white bg-slate-500 rounded-sm p-2"
+              className="font-bold text-white bg-green-500 rounded-sm p-2"
             >
               Login
             </button>
