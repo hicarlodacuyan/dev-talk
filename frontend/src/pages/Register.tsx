@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { toast } from "react-toastify";
 import RegisterForm from "../components/RegisterForm";
 import WelcomeMessage from "../components/WelcomeMessage";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -26,21 +27,23 @@ const Register = () => {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <div className="flex flex-row h-screen bg-gray-100 p-32">
       <WelcomeMessage />
       <section className="flex-1 flex flex-col justify-center items-center gap-4">
-        <RegisterForm />
-        <p>
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-500">
-            Login
-          </Link>
-        </p>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <RegisterForm />
+            <p>
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-500">
+                Login
+              </Link>
+            </p>
+          </>
+        )}
       </section>
     </div>
   );
