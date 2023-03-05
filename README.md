@@ -27,5 +27,7 @@ Join communities of programmers and start discussions about companies. Search or
 #### Sample `.env` file format:
 
 `PORT=3000`
+<br>
 `MONGODB_URI=mongodb://myDBReader:D1fficultP%40ssw0rd@mongodb0.example.com:27017/?authSource=admin`
+<br>
 `SECRET=secret`
