@@ -34,7 +34,10 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleRegistration} className="lg:max-w-md lg:mx-auto">
+    <form
+      onSubmit={handleRegistration}
+      className="lg:max-w-md lg:mx-auto bg-gray-800 p-8 rounded-md drop-shadow-md"
+    >
       <div className="flex flex-col gap-4">
         <h1 className="text-xl font-bold">Create your account</h1>
         <input

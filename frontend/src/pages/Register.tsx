@@ -28,7 +28,7 @@ const Register = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center lg:items-center gap-4 bg-black text-gray-300 h-screen p-8 lg:p-32">
+    <div className="flex flex-col lg:flex-row justify-center lg:items-center gap-4 bg-gray-900 text-gray-300 h-screen p-8 lg:p-32">
       {isLoading ? (
         <LoadingSpinner />
       ) : (
