@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppDispatch } from "../app/hooks";
 import { register } from "../features/auth/authSlice";
 import { NewUserCredentials } from "../types/user";
@@ -33,14 +34,9 @@ const RegisterForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleRegistration}
-      className="bg-white p-8 rounded-md drop-shadow-md flex flex-col gap-2 w-3/5"
-    >
-      <div className="flex flex-col text-sm gap-4">
-        <h1 className="text-gray-700 text-center font-semibold text-2xl">
-          Register an account
-        </h1>
+    <form onSubmit={handleRegistration} className="lg:max-w-md lg:mx-auto">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-xl font-bold">Create your account</h1>
         <input
           type="text"
           value={name}
@@ -48,7 +44,7 @@ const RegisterForm = () => {
           onChange={onChange}
           placeholder="Name"
           required
-          className="p-2 rounded-sm border-solid border-2 border-slate-300"
+          className="bg-transparent border-2 outline-none rounded-md p-2 focus:border-blue-500"
         />
         <input
           type="text"
@@ -57,7 +53,7 @@ const RegisterForm = () => {
           onChange={onChange}
           placeholder="Username"
           required
-          className="p-2 rounded-sm border-solid border-2 border-slate-300"
+          className="bg-transparent border-2 outline-none rounded-md p-2 focus:border-blue-500"
         />
         <input
           type="password"
@@ -66,14 +62,20 @@ const RegisterForm = () => {
           onChange={onChange}
           placeholder="Password"
           required
-          className="p-2 rounded-sm border-solid border-2 border-slate-300"
+          className="bg-transparent border-2 outline-none rounded-md p-2 focus:border-blue-500"
         />
         <button
           type="submit"
-          className="font-bold text-white bg-green-500 rounded-sm p-2"
+          className="bg-gray-100 text-black font-bold rounded-md p-2 hover:bg-gray-300"
         >
           Register
         </button>
+        <p className="text-gray-500">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Login
+          </Link>
+        </p>
       </div>
     </form>
   );

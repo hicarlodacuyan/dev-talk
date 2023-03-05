@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { reset } from "../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { toast } from "react-toastify";
@@ -28,23 +28,19 @@ const Register = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   return (
-    <div className="flex flex-row h-screen bg-gray-100 p-32">
-      <WelcomeMessage />
-      <section className="flex-1 flex flex-col justify-center items-center gap-4">
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <>
-            <RegisterForm />
-            <p>
-              Already have an account?{" "}
-              <Link to="/login" className="text-blue-500">
-                Login
-              </Link>
-            </p>
-          </>
-        )}
-      </section>
+    <div className="flex flex-col lg:flex-row justify-center lg:items-center gap-4 bg-black text-gray-300 h-screen p-8 lg:p-32">
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <section className="lg:flex-1">
+            <WelcomeMessage />
+          </section>
+          <section className="lg:flex-1">
+            {isLoading ? <LoadingSpinner /> : <RegisterForm />}
+          </section>
+        </>
+      )}
     </div>
   );
 };

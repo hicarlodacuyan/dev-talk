@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppDispatch } from "../app/hooks";
 import { login } from "../features/auth/authSlice";
 
@@ -30,14 +31,9 @@ const LoginForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleLogin}
-      className="bg-white p-8 rounded-md drop-shadow-md flex flex-col gap-2 lg:w-3/5"
-    >
-      <div className="flex flex-col text-sm gap-4">
-        <h1 className="text-gray-700 text-center font-semibold text-2xl">
-          Login your account
-        </h1>
+    <form onSubmit={handleLogin} className="lg:max-w-md lg:mx-auto">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-xl font-bold">Sign in to DevTalk</h1>
         <input
           type="text"
           value={username}
@@ -45,7 +41,7 @@ const LoginForm = () => {
           onChange={onChange}
           placeholder="Username"
           required
-          className="p-2 rounded-sm border-solid border-2 border-slate-300"
+          className="bg-transparent border-2 outline-none rounded-md p-2 focus:border-blue-500"
         />
         <input
           type="password"
@@ -54,14 +50,20 @@ const LoginForm = () => {
           onChange={onChange}
           placeholder="Password"
           required
-          className="p-2 rounded-sm border-solid border-2 border-slate-300"
+          className="bg-transparent border-2 outline-none rounded-md p-2 focus:border-blue-500"
         />
         <button
           type="submit"
-          className="font-bold text-white bg-green-500 rounded-sm p-2"
+          className="bg-gray-100 text-black font-bold rounded-md p-2 hover:bg-gray-300"
         >
           Login
         </button>
+        <p className="text-gray-500">
+          Don't have an account?{" "}
+          <Link to="/register" className="text-blue-500 hover:underline">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </form>
   );

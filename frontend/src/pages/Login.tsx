@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -28,23 +28,19 @@ const Login = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   return (
-    <div className="flex flex-col justify-center gap-8 lg:flex-row bg-gray-100 p-4 lg:p-32 h-screen gap">
-      <WelcomeMessage />
-      <section className="lg:flex-1 flex flex-col justify-center lg:items-center gap-4">
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <>
+    <div className="flex flex-col lg:flex-row justify-center lg:items-center gap-4 bg-black text-gray-300 h-screen p-8 lg:p-32">
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <section className="lg:flex-1">
+            <WelcomeMessage />
+          </section>
+          <section className="lg:flex-1">
             <LoginForm />
-            <p className="text-gray-500 text-center">
-              Need an account?{" "}
-              <Link to="/register" className="text-blue-500">
-                Sign Up
-              </Link>
-            </p>
-          </>
-        )}
-      </section>
+          </section>
+        </>
+      )}
     </div>
   );
 };
