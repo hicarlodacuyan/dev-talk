@@ -12,10 +12,17 @@ const ChatRoom = () => {
   }, [user, navigate]);
 
   return (
-    <div>
-      {`You are logged in as ${user?.name}`}
-      <Logout />
-    </div>
+    <main className="flex h-screen text-gray-100">
+      <aside className="flex-2 flex items-end bg-gray-900 h-full p-4">
+        <section className="flex items-center gap-4">
+          {`You are logged in as ${user?.name}`}
+          <Logout />
+        </section>
+      </aside>
+      <section className="flex-1 flex justify-center items-center bg-gray-800 text-2xl font-bold">
+        See conversations here
+      </section>
+    </main>
   );
 };
 
