@@ -13,7 +13,7 @@ const ChatRoom = () => {
 
   return (
     <main className="flex h-screen text-gray-100">
-      <aside className="flex-2 flex items-end bg-gray-900 h-full p-4">
+      <aside className="flex-2 hidden lg:flex items-end bg-gray-900 h-full p-4">
         <section className="flex items-center gap-4">
           {`You are logged in as ${user?.name}`}
           <Logout />

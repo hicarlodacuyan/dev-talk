@@ -4,7 +4,7 @@ import User from "../models/user";
 import toNewUserEntry from "../utils/toNewUserEntry";
 
 const getUsers = async (_req: Request, res: Response) => {
-  const users = await User.find({}).populate("chats");
+  const users = await User.find({}).populate("companies");
 
   res.json(users);
 };

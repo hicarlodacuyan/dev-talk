@@ -5,6 +5,12 @@ const userSchema = new mongoose.Schema({
   username: String,
   name: String,
   passwordHash: String,
+  companies: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
+  ],
   chats: [
     {
       type: mongoose.Schema.Types.ObjectId,

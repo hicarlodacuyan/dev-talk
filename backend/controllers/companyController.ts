@@ -35,6 +35,8 @@ const addCompany = async (req: Request, res: Response): Promise<void> => {
     likes: newCompanyEntry.likes,
   });
   const savedCompany = await company.save();
+  user.companies = [...user.companies, savedCompany._id];
+  await user.save();
 
   res.status(201).json(savedCompany);
 };
